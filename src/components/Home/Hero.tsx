@@ -10,7 +10,6 @@ const Hero: React.FC = () => {
   const [typingSpeed, setTypingSpeed] = useState(80);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const strings = ["Ideas", "Dreams", "Visions"];
 
   // Typing animation
@@ -39,7 +38,7 @@ const Hero: React.FC = () => {
     return () => clearTimeout(timer);
   }, [typedText, isDeleting, loopNum, typingSpeed, strings]);
 
-  // 3D tilt effect for monitor
+  // Mouse tilt interaction
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (frameRef.current) {
@@ -53,15 +52,18 @@ const Hero: React.FC = () => {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  // Particle system with linking lines + mouse interaction
+  // Particle system background
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resizeCanvas();
 
     class Particle {
       x: number;
@@ -88,13 +90,12 @@ const Hero: React.FC = () => {
         this.speedX = Math.random() * 0.6 - 0.3;
         this.speedY = Math.random() * 0.6 - 0.3;
         this.opacity = Math.random() * 0.8 + 0.3;
-
         const colors = [
-          "59,130,246",
-          "34,211,238",
-          "139,92,246",
-          "236,72,153",
-          "34,197,94",
+          "59,130,246", // blue
+          "34,211,238", // cyan
+          "139,92,246", // purple
+          "236,72,153", // pink
+          "34,197,94", // green
         ];
         this.color = colors[Math.floor(Math.random() * colors.length)];
         this.angle = Math.random() * Math.PI * 2;
@@ -158,7 +159,8 @@ const Hero: React.FC = () => {
     }
 
     const particles: Particle[] = [];
-    const particleCount = 120;
+    const isMobile = window.innerWidth < 768;
+    const particleCount = isMobile ? 30 : 130;
     const mouse = { x: 0, y: 0, pressed: false };
     let animationId: number;
 
@@ -184,17 +186,15 @@ const Hero: React.FC = () => {
 
     const animate = () => {
       if (!ctx) return;
-
       ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Draw particles
       particles.forEach((p) => {
         p.update(mouse.x, mouse.y, mouse.pressed);
         p.draw(ctx);
       });
 
-      // Draw linking lines
+      // Linking lines
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
@@ -224,18 +224,14 @@ const Hero: React.FC = () => {
     };
     animate();
 
-    const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", resizeCanvas);
 
     return () => {
       cancelAnimationFrame(animationId);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("resize", resizeCanvas);
     };
   }, []);
 
@@ -247,22 +243,35 @@ const Hero: React.FC = () => {
       id="home"
       className="min-h-screen flex items-center relative overflow-hidden bg-black"
     >
-      {/* Particle Background */}
+      {/* Canvas background */}
       <canvas ref={canvasRef} className="absolute inset-0 z-0" />
       <div className="absolute inset-0 bg-gradient-to-br from-blue-950/40 via-purple-950/30 to-black/60 z-0" />
 
-      {/* Main Content */}
+      {/* Main content */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-12 items-center">
-        {/* Text */}
+        {/* TEXT BLOCK */}
         <div className="space-y-8 text-left">
           <h1 className="text-5xl lg:text-7xl font-bold leading-tight text-white drop-shadow-2xl">
             We Turn{" "}
-            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-300 bg-clip-text text-transparent animate-pulse">
+            <span
+              className="relative inline-block font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-300 bg-clip-text text-transparent"
+              style={{
+                display: "inline-block",
+                minWidth: "7ch",
+              }}
+            >
               {typedText}
               <span className="animate-pulse">|</span>
+              <span
+                className="absolute inset-0 opacity-0 select-none"
+                aria-hidden="true"
+              >
+                Visions
+              </span>
             </span>{" "}
             Into Scalable Products
           </h1>
+
           <p className="text-xl text-gray-300 max-w-2xl drop-shadow-lg">
             At Foundr Tech, we think like founders. We partner with you through
             every step of the startup journey from idea to product-market fit.
@@ -286,7 +295,7 @@ const Hero: React.FC = () => {
           </div>
         </div>
 
-        {/* 3D Monitor */}
+        {/* 3D MONITOR */}
         <div
           ref={frameRef}
           className="relative flex justify-center"
@@ -314,18 +323,10 @@ const Hero: React.FC = () => {
               </div>
             </div>
 
-            {/* Stand + Glow */}
+            {/* Stand */}
             <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-48 h-4 bg-gradient-to-r from-gray-700 via-gray-600 to-gray-700 rounded-full shadow-[0_0_25px_rgba(0,0,0,0.5)]" />
             <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-8 h-12 bg-gradient-to-b from-gray-600 to-gray-800 rounded-t-lg shadow-inner" />
             <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-[300px] h-[150px] bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 blur-[80px] opacity-20" />
-          </div>
-
-          <div
-            className="absolute -bottom-8 -right-8 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-500 text-white p-4 rounded-xl shadow-2xl"
-            style={{ transform: "translateZ(50px)" }}
-          >
-            <div className="text-2xl font-bold">20+</div>
-            <div className="text-sm">Projects Delivered</div>
           </div>
         </div>
       </div>

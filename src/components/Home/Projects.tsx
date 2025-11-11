@@ -21,7 +21,8 @@ const projects: Project[] = [
     tag: "Startup",
     color: "bg-cyan-500",
     type: "mobile",
-    image: "resources/project-restate.jpg",
+    image:
+      "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop",
     description:
       "Shared-economy platform for construction equipment rental without inventory management.",
     stack: ["React Native", "Node.js", "Firebase", "Razor Pay"],
@@ -33,7 +34,8 @@ const projects: Project[] = [
     tag: "Startup",
     color: "bg-emerald-500",
     type: "mobile",
-    image: "resources/project-bitebox.jpg",
+    image:
+      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&h=600&fit=crop",
     description:
       "Canteen delivery app with smooth ordering and campus delivery system.",
     stack: ["Flutter", "Firebase", "Razor Pay"],
@@ -45,7 +47,8 @@ const projects: Project[] = [
     tag: "EdTech",
     color: "bg-orange-500",
     type: "mobile",
-    image: "resources/project-happyschool.jpg",
+    image:
+      "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&h=600&fit=crop",
     description:
       "Platform for teachers to improve classroom engagement and track student growth.",
     stack: ["Flutter", "Firebase", "Node Js"],
@@ -57,7 +60,8 @@ const projects: Project[] = [
     tag: "Quick Commerce",
     color: "bg-pink-500",
     type: "mobile",
-    image: "resources/project-carocart.jpg",
+    image:
+      "https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800&h=600&fit=crop",
     description:
       "Hyperlocal delivery app with real-time tracking and secure payments for defense bases.",
     stack: ["Flutter", "My SQL", "Spring Boot", "React Js"],
@@ -69,7 +73,8 @@ const projects: Project[] = [
     tag: "Education",
     color: "bg-indigo-500",
     type: "web",
-    image: "resources/project-happyschool.jpg",
+    image:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
     description:
       "Comprehensive dashboard to manage classrooms, track learning analytics, and communicate efficiently.",
     stack: ["React Js", "Next Js", "Firebase", "Node Js"],
@@ -81,7 +86,8 @@ const projects: Project[] = [
     tag: "Automation",
     color: "bg-blue-500",
     type: "saas",
-    image: "resources/project-gohighlevel.jpg",
+    image:
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
     description:
       "Automation suite including CRM, AI assistants, and workflow automation tools.",
   },
@@ -92,7 +98,8 @@ const projects: Project[] = [
     tag: "Marketplace",
     color: "bg-yellow-500",
     type: "mobile",
-    image: "resources/project-gcc.jpg",
+    image:
+      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop",
     description:
       "Marketplace app for tribal goods empowering local cooperatives through digital trade.",
     stack: ["Flutter", "Firebase", "Node Js"],
@@ -109,11 +116,18 @@ const filters = [
 
 const Projects: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<string>("all");
-  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // detect mobile device
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const filteredProjects =
     activeFilter === "all"
@@ -129,33 +143,16 @@ const Projects: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
-  const handleMouseMove = (
-    e: React.MouseEvent<HTMLDivElement>,
-    projectId: string
-  ) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width;
-    const y = (e.clientY - rect.top) / rect.height;
-    setMousePosition({ x, y });
-  };
-
-  const getCardTransform = (id: string) => {
-    if (hoveredCard !== id) return "";
-    const rotateX = (mousePosition.y - 0.5) * -8;
-    const rotateY = (mousePosition.x - 0.5) * 8;
-    return `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-  };
-
   return (
     <section
       ref={sectionRef}
       id="projects"
-      className="py-24 bg-gradient-to-br from-black via-gray-950 to-[#030014] relative overflow-hidden"
+      className="py-20 bg-gradient-to-br from-black via-gray-950 to-[#030014] relative overflow-hidden"
     >
-      {/* Lights */}
+      {/* Background glows */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute -top-20 left-1/4 w-[400px] h-[400px] bg-cyan-500/10 blur-[120px] rounded-full animate-pulse" />
-        <div className="absolute bottom-0 right-1/3 w-[500px] h-[500px] bg-purple-600/10 blur-[140px] rounded-full animate-pulse delay-500" />
+        <div className="absolute -top-20 left-1/4 w-[400px] h-[400px] bg-cyan-500/10 blur-[120px] rounded-full" />
+        <div className="absolute bottom-0 right-1/3 w-[500px] h-[500px] bg-purple-600/10 blur-[140px] rounded-full" />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
@@ -172,200 +169,153 @@ const Projects: React.FC = () => {
             Featured Projects
           </h2>
           <p className="text-gray-400 text-lg max-w-3xl mx-auto">
-            Step into our world of futuristic builds — sleek, scalable and
-            powered by innovation.
+            Explore scalable builds crafted with precision and creativity.
           </p>
         </div>
 
         {/* Filters */}
-        <div className="flex flex-wrap justify-center gap-4 mb-16">
-          {filters.map((f, i) => (
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
+          {filters.map((f) => (
             <button
               key={f.value}
               onClick={() => setActiveFilter(f.value)}
-              style={{ transitionDelay: `${i * 50}ms` }}
-              className={`relative px-6 py-3 rounded-lg font-medium backdrop-blur-lg transition-all duration-300 border ${
+              className={`relative px-5 py-2.5 rounded-lg font-medium backdrop-blur-lg transition-all duration-300 border ${
                 activeFilter === f.value
-                  ? "text-white border-cyan-400 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 shadow-[0_0_25px_rgba(56,189,248,0.3)]"
+                  ? "text-white border-cyan-400 bg-gradient-to-r from-cyan-500/20 to-blue-500/20"
                   : "text-gray-300 border-white/10 hover:text-white hover:border-cyan-400/30"
               }`}
             >
               {f.label}
-              {activeFilter === f.value && (
-                <motion.div
-                  layoutId="activeFilter"
-                  className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"
-                />
-              )}
             </button>
           ))}
         </div>
 
         {/* Projects Grid */}
-        <motion.div
-          key={activeFilter}
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 items-stretch"
+        <div
+          className={`grid ${
+            isMobile
+              ? "grid-cols-1"
+              : "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+          } gap-6`}
         >
-          <AnimatePresence>
-            {filteredProjects.map((p, i) => (
-              <motion.div
-                key={p.id}
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ delay: i * 0.05, duration: 0.5 }}
-                className="flex flex-col h-full"
+          {filteredProjects.map((p, i) => (
+            <motion.div
+              key={p.id}
+              initial={{ opacity: 0, y: isMobile ? 0 : 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: isMobile ? 0 : 0.4, delay: i * 0.05 }}
+              className="flex flex-col h-full"
+            >
+              <div
+                className="group relative transition-all duration-300 cursor-pointer flex flex-col h-full hover:scale-[1.02]"
+                onClick={() => setSelectedProject(p)}
               >
-                <div
-                  className="group relative transition-all duration-700 cursor-pointer flex flex-col h-full"
-                  style={{
-                    transform: getCardTransform(p.id),
-                    transitionDelay: `${i * 100}ms`,
-                  }}
-                  onMouseEnter={() => setHoveredCard(p.id)}
-                  onMouseLeave={() => setHoveredCard(null)}
-                  onMouseMove={(e) => handleMouseMove(e, p.id)}
-                  onClick={() => setSelectedProject(p)}
-                >
-                  <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-gradient-to-br from-gray-900/60 to-gray-800/40 backdrop-blur-xl flex flex-col h-full shadow-[0_0_25px_rgba(56,189,248,0.05)] hover:shadow-[0_0_60px_rgba(56,189,248,0.3)] transition-all duration-500">
-                    <div className="aspect-video overflow-hidden relative shrink-0">
-                      <img
-                        src={p.image}
-                        alt={p.name}
-                        className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                      <span
-                        className={`${p.color} text-white absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-semibold shadow-lg`}
-                      >
-                        {p.category}
-                      </span>
-                    </div>
+                <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-gradient-to-br from-gray-900/60 to-gray-800/40 backdrop-blur-md flex flex-col h-full shadow-[0_0_20px_rgba(56,189,248,0.08)] hover:shadow-[0_0_25px_rgba(56,189,248,0.15)] transition-all duration-300">
+                  <div className="aspect-video relative">
+                    <img
+                      src={p.image}
+                      alt={p.name}
+                      loading="lazy"
+                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                    <span
+                      className={`${p.color} text-white absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-semibold shadow-lg`}
+                    >
+                      {p.category}
+                    </span>
+                  </div>
 
-                    <div className="p-6 flex flex-col flex-1">
-                      <span className="text-xs text-cyan-400 uppercase tracking-wide mb-2">
-                        {p.tag}
-                      </span>
-                      <h3 className="text-2xl font-bold mb-3 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                        {p.name}
-                      </h3>
-                      <p className="text-gray-400 text-sm mb-4 leading-relaxed line-clamp-3 flex-1">
-                        {p.description}
-                      </p>
+                  <div className="p-5 flex flex-col flex-1">
+                    <span className="text-xs text-cyan-400 uppercase mb-1">
+                      {p.tag}
+                    </span>
+                    <h3 className="text-xl font-bold mb-2 text-white">
+                      {p.name}
+                    </h3>
+                    <p className="text-gray-400 text-sm flex-1 line-clamp-3">
+                      {p.description}
+                    </p>
 
-                      {p.stack && (
-                        <div className="flex flex-wrap gap-2 mb-4">
-                          {p.stack.slice(0, 3).map((tech) => (
-                            <span
-                              key={tech}
-                              className="text-xs bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/30 text-cyan-300 px-3 py-1 rounded-full"
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-
-                      <div className="mt-auto flex items-center gap-2 text-cyan-400 font-medium hover:text-cyan-300 transition-colors">
-                        <span>Explore Project</span>
-                        <svg
-                          className="w-4 h-4"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M17 8l4 4m0 0l-4 4m4-4H3"
-                          />
-                        </svg>
+                    {p.stack && (
+                      <div className="flex flex-wrap gap-2 mt-3">
+                        {p.stack.slice(0, 3).map((tech) => (
+                          <span
+                            key={tech}
+                            className="text-xs bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 px-3 py-1 rounded-full"
+                          >
+                            {tech}
+                          </span>
+                        ))}
                       </div>
-                    </div>
+                    )}
                   </div>
                 </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
 
         {/* View All */}
-        <div className="text-center mt-16">
+        <div className="text-center mt-12">
           <a
             href="/projects"
-            className="relative inline-flex items-center gap-3 px-10 py-5 rounded-xl font-semibold text-lg bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-600 hover:from-cyan-500 hover:via-blue-500 hover:to-purple-500 transition-all transform hover:scale-105 shadow-[0_0_40px_rgba(56,189,248,0.3)]"
+            className="relative inline-flex items-center gap-3 px-8 py-4 rounded-xl font-semibold text-lg bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-600 hover:from-cyan-500 hover:to-purple-500 transition-all transform hover:scale-105 shadow-[0_0_30px_rgba(56,189,248,0.25)]"
           >
             View All Projects
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M13 7l5 5m0 0l-5 5m5-5H6"
-              />
-            </svg>
           </a>
         </div>
       </div>
 
-      {/* Futuristic Modal */}
+      {/* Modal */}
       <AnimatePresence>
         {selectedProject && (
           <motion.div
-            className="fixed inset-0 bg-black/80 backdrop-blur-2xl z-50 flex items-center justify-center p-6"
+            className="fixed inset-0 bg-black/80 backdrop-blur-xl z-50 flex items-center justify-center p-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedProject(null)}
           >
             <motion.div
-              className="relative max-w-4xl w-full bg-gradient-to-br from-gray-900/90 to-black border border-cyan-400/30 rounded-3xl overflow-hidden p-8 shadow-[0_0_60px_rgba(56,189,248,0.3)]"
-              initial={{ scale: 0.9, opacity: 0 }}
+              className="relative max-w-3xl w-full bg-gradient-to-br from-gray-900/90 to-black border border-cyan-400/30 rounded-3xl overflow-hidden p-6"
+              initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.2 }}
               onClick={(e) => e.stopPropagation()}
             >
               <button
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-5 right-5 text-gray-400 hover:text-white transition"
+                className="absolute top-5 right-5 text-gray-400 hover:text-white transition text-2xl"
               >
                 ✕
               </button>
-              <div className="grid md:grid-cols-2 gap-8">
+              <div className="grid md:grid-cols-2 gap-6">
                 <img
                   src={selectedProject.image}
                   alt={selectedProject.name}
+                  loading="lazy"
                   className="rounded-2xl w-full h-64 object-cover border border-white/10"
                 />
                 <div>
                   <span
-                    className={`${selectedProject.color} text-white px-4 py-2 rounded-full text-sm font-semibold inline-block mb-4`}
+                    className={`${selectedProject.color} text-white px-3 py-1 rounded-full text-sm font-semibold inline-block mb-3`}
                   >
                     {selectedProject.category}
                   </span>
-                  <h3 className="text-4xl font-bold mb-3 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                  <h3 className="text-3xl font-bold mb-2 text-cyan-300">
                     {selectedProject.name}
                   </h3>
-                  <p className="text-gray-300 mb-6 leading-relaxed">
+                  <p className="text-gray-300 mb-4 text-sm leading-relaxed">
                     {selectedProject.description}
                   </p>
                   {selectedProject.stack && (
-                    <div className="flex flex-wrap gap-3">
+                    <div className="flex flex-wrap gap-2">
                       {selectedProject.stack.map((tech) => (
                         <span
                           key={tech}
-                          className="px-4 py-2 rounded-lg text-sm text-cyan-300 border border-cyan-400/30 bg-cyan-400/10"
+                          className="px-3 py-1 rounded-lg text-xs text-cyan-300 border border-cyan-400/30 bg-cyan-400/10"
                         >
                           {tech}
                         </span>

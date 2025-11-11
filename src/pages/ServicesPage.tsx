@@ -16,7 +16,6 @@ const ServicesPage: React.FC = () => {
         <ServicesHeader />
         <CoreServices />
         <DevelopmentProcess />
-        <ProcessDetails />
         <TechStack />
         <CTASection />
       </main>

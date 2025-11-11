@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "restate-3647a"
-  }
+  },
+  "targets": {
+    "restate-3647a": {
+      "hosting": {
+        "foundrtech": [
+          "foundrtech"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

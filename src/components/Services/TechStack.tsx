@@ -42,7 +42,7 @@ const stacks = [
 ];
 
 const TechStack = () => {
-  const [hovered, setHovered] = useState<number | null>(null);
+  const [, setHovered] = useState<number | null>(null);
 
   return (
     <section className="relative py-28 overflow-hidden bg-gradient-to-b from-[#020511] via-[#03091a] to-[#050a15] text-white">

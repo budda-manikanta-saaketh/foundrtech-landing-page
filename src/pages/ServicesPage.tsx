@@ -4,7 +4,6 @@ import Navbar from "../components/NavBar";
 import CTASection from "../components/Services/CTASection";
 import CoreServices from "../components/Services/CoreService";
 import DevelopmentProcess from "../components/Services/DevelopmentProcess";
-import ProcessDetails from "../components/Services/ProcessDetails";
 import ServicesHeader from "../components/Services/ServiceHeader";
 import TechStack from "../components/Services/TechStack";
 

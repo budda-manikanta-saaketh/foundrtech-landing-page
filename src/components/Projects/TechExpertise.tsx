@@ -1,72 +1,85 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import {
+  Atom,
+  Smartphone,
+  Zap,
+  Flame,
+  Workflow,
+  Server,
+  Database,
+  Cloud,
+  PenTool,
+  CreditCard,
+  Bot,
+} from "lucide-react";
 
 export default function TechExpertise() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const techStack = [
     {
-      icon: "⚛️",
+      icon: <Atom className="w-10 h-10 text-cyan-400" />,
       name: "React JS",
       desc: "Web Framework",
       color: "from-cyan-400 to-blue-500",
     },
     {
-      icon: "🎯",
+      icon: <Smartphone className="w-10 h-10 text-blue-400" />,
       name: "Flutter",
       desc: "Cross-Platform",
       color: "from-blue-400 to-indigo-500",
     },
     {
-      icon: "⚡",
+      icon: <Zap className="w-10 h-10 text-gray-400" />,
       name: "Next.js",
       desc: "Web Framework",
       color: "from-gray-300 to-gray-500",
     },
     {
-      icon: "🔥",
+      icon: <Flame className="w-10 h-10 text-yellow-400" />,
       name: "Firebase",
       desc: "Backend",
       color: "from-yellow-400 to-orange-500",
     },
     {
-      icon: "🐍",
+      icon: <Workflow className="w-10 h-10 text-blue-400" />,
       name: "Python",
       desc: "AI/ML",
       color: "from-blue-500 to-yellow-400",
     },
     {
-      icon: "🟢",
+      icon: <Server className="w-10 h-10 text-green-400" />,
       name: "Node.js",
       desc: "Backend",
       color: "from-green-400 to-emerald-500",
     },
     {
-      icon: "🗄️",
+      icon: <Database className="w-10 h-10 text-emerald-400" />,
       name: "MongoDB",
       desc: "Database",
       color: "from-green-500 to-teal-500",
     },
     {
-      icon: "☁️",
+      icon: <Cloud className="w-10 h-10 text-blue-400" />,
       name: "GCP",
       desc: "Cloud Services",
       color: "from-blue-400 to-red-400",
     },
     {
-      icon: "🎨",
+      icon: <PenTool className="w-10 h-10 text-pink-400" />,
       name: "GraphQL",
       desc: "API Design",
       color: "from-pink-400 to-purple-500",
     },
     {
-      icon: "💳",
+      icon: <CreditCard className="w-10 h-10 text-emerald-400" />,
       name: "Payment Gateways",
       desc: "Payments",
       color: "from-emerald-400 to-cyan-500",
     },
     {
-      icon: "🤖",
+      icon: <Bot className="w-10 h-10 text-purple-400" />,
       name: "AI Automations",
       desc: "Workflows",
       color: "from-purple-400 to-pink-500",
@@ -75,36 +88,20 @@ export default function TechExpertise() {
 
   return (
     <section className="relative py-24 bg-black overflow-hidden">
-      {/* Animated Grid Background */}
+      {/* Futuristic Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(56,189,248,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(56,189,248,0.02)_1px,transparent_1px)] bg-[size:50px_50px]" />
-
-      {/* Radial Gradient Overlay */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.1),transparent_70%)]" />
 
-      {/* Floating Orbs */}
+      {/* Floating Glows */}
       <motion.div
         className="absolute top-20 left-10 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl"
-        animate={{
-          x: [0, 100, 0],
-          y: [0, 50, 0],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+        animate={{ x: [0, 100, 0], y: [0, 50, 0] }}
+        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
         className="absolute bottom-20 right-10 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"
-        animate={{
-          x: [0, -100, 0],
-          y: [0, -50, 0],
-        }}
-        transition={{
-          duration: 15,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+        animate={{ x: [0, -100, 0], y: [0, -50, 0] }}
+        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
       />
 
       <div className="max-w-7xl mx-auto px-4 relative z-10">
@@ -142,11 +139,7 @@ export default function TechExpertise() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          variants={{
-            visible: {
-              transition: { staggerChildren: 0.05 },
-            },
-          }}
+          variants={{ visible: { transition: { staggerChildren: 0.05 } } }}
         >
           {techStack.map((tech, i) => (
             <motion.div
@@ -160,7 +153,7 @@ export default function TechExpertise() {
               onHoverEnd={() => setHoveredIndex(null)}
               className="relative group"
             >
-              {/* Glow Effect */}
+              {/* Glow */}
               <div
                 className={`absolute -inset-[1px] rounded-2xl opacity-0 ${
                   hoveredIndex === i ? "opacity-50" : ""
@@ -181,22 +174,13 @@ export default function TechExpertise() {
                 whileHover={{ y: -8 }}
                 transition={{ duration: 0.2 }}
               >
-                {/* Corner Accent */}
                 <div
                   className={`absolute top-0 right-0 w-16 h-16 bg-gradient-to-br ${tech.color} opacity-10 rounded-bl-3xl`}
                 />
 
-                {/* Animated Background Pattern */}
-                <motion.div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{
-                    backgroundImage: `radial-gradient(circle at 20% 50%, rgba(255,255,255,0.05) 0%, transparent 50%)`,
-                  }}
-                />
-
                 {/* Icon */}
                 <motion.div
-                  className="text-5xl mb-3 relative z-10"
+                  className="mb-3 relative z-10 flex justify-center"
                   animate={
                     hoveredIndex === i
                       ? { scale: 1.2, rotate: 5 }
@@ -207,13 +191,11 @@ export default function TechExpertise() {
                   {tech.icon}
                 </motion.div>
 
-                {/* Tech Name */}
+                {/* Title + Desc */}
                 <div className="relative z-10">
                   <h3 className="font-bold text-white mb-1 text-base">
                     {tech.name}
                   </h3>
-
-                  {/* Animated Underline */}
                   <motion.div
                     className={`h-[2px] mx-auto rounded-full bg-gradient-to-r ${tech.color}`}
                     initial={{ width: "0%" }}
@@ -222,17 +204,14 @@ export default function TechExpertise() {
                     }
                     transition={{ duration: 0.3 }}
                   />
-
                   <p className="text-sm text-gray-400 mt-2">{tech.desc}</p>
                 </div>
 
                 {/* Scan Line */}
                 {hoveredIndex === i && (
                   <motion.div
-                    className={`absolute inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent`}
-                    animate={{
-                      top: ["0%", "100%"],
-                    }}
+                    className="absolute inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent"
+                    animate={{ top: ["0%", "100%"] }}
                     transition={{
                       duration: 1.5,
                       repeat: Infinity,
@@ -240,51 +219,8 @@ export default function TechExpertise() {
                     }}
                   />
                 )}
-
-                {/* Binary Code Effect */}
-                {hoveredIndex === i && (
-                  <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-10">
-                    <div className="text-xs text-cyan-400 font-mono whitespace-pre">
-                      {`01001010\n10110101\n01110010`}
-                    </div>
-                  </div>
-                )}
               </motion.div>
             </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Bottom Stat Bar */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-          className="mt-20 flex justify-center gap-12 flex-wrap"
-        >
-          {[
-            { label: "Technologies", value: "11+" },
-            { label: "Projects Delivered", value: "20+" },
-            { label: "Years Experience", value: "3+" },
-          ].map((stat, i) => (
-            <div key={i} className="text-center">
-              <motion.div
-                className="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-2"
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                viewport={{ once: true }}
-                transition={{
-                  delay: 0.6 + i * 0.1,
-                  type: "spring",
-                  stiffness: 200,
-                }}
-              >
-                {stat.value}
-              </motion.div>
-              <div className="text-gray-400 text-sm uppercase tracking-wider">
-                {stat.label}
-              </div>
-            </div>
           ))}
         </motion.div>
       </div>

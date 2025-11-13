@@ -276,6 +276,7 @@ const Projects: React.FC = () => {
       </div>
 
       {/* Modal */}
+      {/* Modal */}
       <AnimatePresence>
         {selectedProject && (
           <motion.div
@@ -286,51 +287,82 @@ const Projects: React.FC = () => {
             onClick={() => setSelectedProject(null)}
           >
             <motion.div
-              className="relative max-w-3xl w-full bg-gradient-to-br from-gray-900/90 to-black border border-cyan-400/30 rounded-3xl overflow-hidden p-6"
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              className="relative max-w-4xl w-full bg-gradient-to-br from-gray-900/90 via-black/80 to-black border border-cyan-400/30 rounded-3xl overflow-hidden shadow-[0_0_40px_rgba(56,189,248,0.35)]"
+              initial={{ scale: 0.9, y: 20, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.9, y: 20, opacity: 0 }}
+              transition={{ duration: 0.25, type: "spring", damping: 22 }}
               onClick={(e) => e.stopPropagation()}
             >
+              {/* ⭐ Floating Close Button */}
               <button
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-5 right-5 text-gray-400 hover:text-white transition text-2xl"
+                className="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/50 backdrop-blur-md 
+                     border border-white/20 hover:bg-white/20 transition"
               >
-                ✕
+                <svg
+                  className="w-5 h-5 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
               </button>
-              <div className="grid md:grid-cols-2 gap-6">
-                <img
-                  src={selectedProject.image}
-                  alt={selectedProject.name}
-                  loading="lazy"
-                  className="rounded-2xl w-full h-64 object-cover border border-white/10"
-                />
-                <div>
-                  <span
-                    className={`${selectedProject.color} text-white px-3 py-1 rounded-full text-sm font-semibold inline-block mb-3`}
-                  >
-                    {selectedProject.category}
-                  </span>
-                  <h3 className="text-3xl font-bold mb-2 text-cyan-300">
-                    {selectedProject.name}
-                  </h3>
-                  <p className="text-gray-300 mb-4 text-sm leading-relaxed">
-                    {selectedProject.description}
-                  </p>
-                  {selectedProject.stack && (
-                    <div className="flex flex-wrap gap-2">
+
+              {/* ⭐ Larger Image */}
+              <img
+                src={selectedProject.image}
+                alt={selectedProject.name}
+                className="w-full h-96 object-cover opacity-90 border-b border-white/10"
+              />
+
+              <div className="p-8">
+                <span
+                  className={`${selectedProject.color} text-white px-4 py-1 rounded-full text-sm font-semibold inline-block mb-4`}
+                >
+                  {selectedProject.category}
+                </span>
+
+                <h3 className="text-4xl font-extrabold mb-4 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+                  {selectedProject.name}
+                </h3>
+
+                <p className="text-gray-300 mb-6 leading-relaxed">
+                  {selectedProject.description}
+                </p>
+
+                {selectedProject.stack && (
+                  <>
+                    <h4 className="text-lg font-semibold text-cyan-400 mb-2">
+                      Technology Stack
+                    </h4>
+                    <div className="flex flex-wrap gap-2 mb-4">
                       {selectedProject.stack.map((tech) => (
                         <span
                           key={tech}
-                          className="px-3 py-1 rounded-lg text-xs text-cyan-300 border border-cyan-400/30 bg-cyan-400/10"
+                          className="px-3 py-1 rounded-full text-xs text-cyan-300 
+                               border border-cyan-400/30 bg-cyan-400/10"
                         >
                           {tech}
                         </span>
                       ))}
                     </div>
-                  )}
-                </div>
+                  </>
+                )}
+
+                <button
+                  onClick={() => setSelectedProject(null)}
+                  className="mt-6 w-full py-3 rounded-lg bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
+                       hover:from-cyan-400 hover:to-purple-400 text-white font-semibold transition shadow-lg"
+                >
+                  Close
+                </button>
               </div>
             </motion.div>
           </motion.div>

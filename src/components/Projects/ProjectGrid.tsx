@@ -12,6 +12,7 @@ interface Project {
   impact?: { label: string; value: string }[];
   stack: string[];
   image: string;
+  playstore?: string; // ⭐ ADDED
 }
 
 const filters = [
@@ -45,6 +46,8 @@ const projects: Project[] = [
       { label: "User Rating", value: "4.8/5" },
     ],
     stack: ["Flutter", "Node.js", "Firebase", "Razor Pay API"],
+    playstore:
+      "https://play.google.com/store/apps/details?id=in.restateapp.restate&pli=1",
   },
 
   {
@@ -81,6 +84,8 @@ const projects: Project[] = [
       "Student progress analytics",
     ],
     stack: ["Flutter", "Firebase", "Node Js", "Rest API"],
+    playstore:
+      "https://play.google.com/store/apps/details?id=com.happyschoolculture.happy_school&hl=en_IN",
   },
 
   {
@@ -99,6 +104,8 @@ const projects: Project[] = [
       "Secure payments & wallet support",
     ],
     stack: ["Flutter", "MySQL", "Spring Boot", "React Js"],
+    playstore:
+      "https://play.google.com/store/apps/details?id=com.carocart.carocart&hl=en_IN",
   },
 
   {
@@ -183,7 +190,7 @@ const ProjectsSection: React.FC = () => {
 
   return (
     <section className="relative py-24 bg-gradient-to-br from-black via-[#030014] to-[#0a0f1f] overflow-hidden text-white min-h-screen">
-      {/* Background grid and glow */}
+      {/* Background effects */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:70px_70px]" />
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute w-[500px] h-[500px] -top-40 left-40 bg-cyan-500/10 blur-[150px] rounded-full" />
@@ -272,7 +279,6 @@ const ProjectsSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Modal */}
       <AnimatePresence>
         {selected && (
           <motion.div
@@ -291,15 +297,38 @@ const ProjectsSection: React.FC = () => {
               className="relative bg-gradient-to-br from-gray-900/90 via-black/80 to-black border border-cyan-400/30 rounded-2xl shadow-[0_0_50px_rgba(56,189,248,0.3)] max-w-4xl w-full overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
+              {/* ⭐ Floating Close Button */}
+              <button
+                onClick={() => setSelected(null)}
+                className="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/50 backdrop-blur-md border border-white/20 hover:bg-white/20 transition"
+              >
+                <svg
+                  className="w-5 h-5 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+
+              {/* ⭐ Larger Image */}
               <img
                 src={selected.image}
                 alt={selected.title}
-                className="w-full h-72 object-cover opacity-90"
+                className="w-full h-96 object-cover opacity-90"
               />
+
               <div className="p-8">
                 <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
                   {selected.title}
                 </h3>
+
                 <p className="text-gray-300 mb-6">{selected.summary}</p>
 
                 <h4 className="text-lg font-semibold text-cyan-400 mb-2">
@@ -324,6 +353,26 @@ const ProjectsSection: React.FC = () => {
                     </span>
                   ))}
                 </div>
+
+                {/* Play Store Button (optional) */}
+                {selected.playstore && (
+                  <a
+                    href={selected.playstore}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group/btn relative w-full py-4 rounded-xl mb-4 flex items-center justify-center gap-3 bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500 hover:from-emerald-400 hover:via-green-400 hover:to-teal-400 transition-all duration-300 text-white font-bold text-lg shadow-[0_0_25px_rgba(16,185,129,0.3)] hover:shadow-[0_0_35px_rgba(16,185,129,0.5)] overflow-hidden"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700" />
+                    <svg
+                      className="w-6 h-6 relative z-10"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
+                    </svg>
+                    <span className="relative z-10">View on Play Store</span>
+                  </a>
+                )}
 
                 <button
                   onClick={() => setSelected(null)}

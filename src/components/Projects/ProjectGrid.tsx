@@ -29,7 +29,7 @@ const projects: Project[] = [
     category: "mobile",
     badge: "Mobile App",
     color: "blue",
-    image: "resources/project-restate.jpg",
+    image: "/Restate.png",
     summary:
       "A shared-economy platform connecting construction equipment owners with contractors who need temporary access.",
     features: [
@@ -46,13 +46,14 @@ const projects: Project[] = [
     ],
     stack: ["Flutter", "Node.js", "Firebase", "Razor Pay API"],
   },
+
   {
     id: "bitebox",
     title: "BiteBox",
     category: "mobile",
     badge: "Mobile App",
     color: "green",
-    image: "resources/project-bitebox.jpg",
+    image: "/BiteBox.png",
     summary:
       "A specialized food delivery platform for college campuses, connecting students with canteens and nearby restaurants.",
     features: [
@@ -63,13 +64,14 @@ const projects: Project[] = [
     ],
     stack: ["Flutter", "Firebase", "RazorPay API", "Google Maps API"],
   },
+
   {
     id: "happyschool",
     title: "Happy School",
-    category: "web",
-    badge: "Web Platform",
+    category: "mobile",
+    badge: "Mobile App",
     color: "orange",
-    image: "resources/project-happyschool.jpg",
+    image: "/HappySchool.png",
     summary:
       "An innovative classroom management platform improving teacher-student engagement and parent communication.",
     features: [
@@ -80,22 +82,95 @@ const projects: Project[] = [
     ],
     stack: ["Flutter", "Firebase", "Node Js", "Rest API"],
   },
+
   {
-    id: "gohighlevel",
+    id: "carocart",
+    title: "CaroCart",
+    category: "mobile",
+    badge: "Mobile App",
+    color: "pink",
+    image: "/CaroCart.png",
+    summary:
+      "Hyperlocal quick-commerce solution enabling fast delivery with real-time tracking inside defense bases and local communities.",
+    features: [
+      "Real-time delivery tracking",
+      "Inventory & product catalog sync",
+      "Multiple vendor integration",
+      "Secure payments & wallet support",
+    ],
+    stack: ["Flutter", "MySQL", "Spring Boot", "React Js"],
+  },
+
+  {
+    id: "happyschooldashboard",
+    title: "Happy School Dashboard",
+    category: "web",
+    badge: "Web Dashboard",
+    color: "indigo",
+    image: "/HappySchoolDashboard.png",
+    summary:
+      "A powerful admin dashboard for schools to manage classes, track student analytics, and streamline communication.",
+    features: [
+      "Classroom & teacher management",
+      "Analytics-driven student progress tracking",
+      "Automated attendance & reporting",
+      "Communication tools for parents & teachers",
+    ],
+    stack: ["React Js", "Next Js", "Firebase", "Node Js"],
+  },
+
+  {
+    id: "gcc",
+    title: "GCC App",
+    category: "mobile",
+    badge: "Mobile App",
+    color: "yellow",
+    image: "/Gcc.png",
+    summary:
+      "Marketplace app for tribal goods, empowering local cooperatives and artisans to sell authentic handcrafted products.",
+    features: [
+      "Native marketplace ordering system",
+      "Seller onboarding & catalog management",
+      "Secure online payments",
+      "Order tracking and delivery updates",
+    ],
+    stack: ["Flutter", "Firebase", "Node Js", "Razor Pay API"],
+  },
+
+  {
+    id: "saasplatform",
     title: "Custom SaaS Platform",
     category: "saas",
     badge: "SaaS Platform",
-    color: "purple",
-    image: "resources/project-gohighlevel.jpg",
+    color: "blue",
+    image: "/Saas.png",
     summary:
-      "Business automation SaaS integrating CRM, WhatsApp bots, AI lead qualification, and SEO tools.",
+      "A complete automation suite including CRM, AI workflow assistants, analytics, and business automation tools.",
     features: [
-      "Integrated CRM & automated lead qualification",
-      "WhatsApp bots & social automation",
-      "AI lead scoring & insights",
-      "SEO-friendly website builder",
+      "AI-driven CRM",
+      "Workflow automation",
+      "Integrated analytics dashboard",
+      "Email & WhatsApp automation",
     ],
     stack: ["React", "Node.js", "Firebase", "Stripe API"],
+  },
+
+  {
+    id: "v4c",
+    title: "V4C Teacher App",
+    category: "mobile",
+    badge: "Mobile App",
+    color: "purple",
+    image: "/V4C.png",
+    summary:
+      "A smart classroom management app designed for Smart TVs, enabling teachers to present courses, track completion progress, and manage classroom learning from a single interface.",
+    features: [
+      "Smart TV–optimized classroom dashboard",
+      "Course presentation & playback",
+      "Teacher-wise progress tracking",
+      "Real-time updates synced across devices",
+    ],
+    stack: ["Flutter", "Firebase"],
   },
 ];
 

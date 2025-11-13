@@ -21,8 +21,7 @@ const projects: Project[] = [
     tag: "Startup",
     color: "bg-cyan-500",
     type: "mobile",
-    image:
-      "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop",
+    image: "/Restate.png",
     description:
       "Shared-economy platform for construction equipment rental without inventory management.",
     stack: ["React Native", "Node.js", "Firebase", "Razor Pay"],
@@ -34,8 +33,7 @@ const projects: Project[] = [
     tag: "Startup",
     color: "bg-emerald-500",
     type: "mobile",
-    image:
-      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&h=600&fit=crop",
+    image: "/BiteBox.png",
     description:
       "Canteen delivery app with smooth ordering and campus delivery system.",
     stack: ["Flutter", "Firebase", "Razor Pay"],
@@ -47,8 +45,7 @@ const projects: Project[] = [
     tag: "EdTech",
     color: "bg-orange-500",
     type: "mobile",
-    image:
-      "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&h=600&fit=crop",
+    image: "/HappySchool.png",
     description:
       "Platform for teachers to improve classroom engagement and track student growth.",
     stack: ["Flutter", "Firebase", "Node Js"],
@@ -60,8 +57,7 @@ const projects: Project[] = [
     tag: "Quick Commerce",
     color: "bg-pink-500",
     type: "mobile",
-    image:
-      "https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800&h=600&fit=crop",
+    image: "/CaroCart.png",
     description:
       "Hyperlocal delivery app with real-time tracking and secure payments for defense bases.",
     stack: ["Flutter", "My SQL", "Spring Boot", "React Js"],
@@ -73,23 +69,10 @@ const projects: Project[] = [
     tag: "Education",
     color: "bg-indigo-500",
     type: "web",
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+    image: "/HappySchoolDashboard.png",
     description:
       "Comprehensive dashboard to manage classrooms, track learning analytics, and communicate efficiently.",
     stack: ["React Js", "Next Js", "Firebase", "Node Js"],
-  },
-  {
-    id: "gohighlevel",
-    name: "SaaS Platform",
-    category: "SaaS Platform",
-    tag: "Automation",
-    color: "bg-blue-500",
-    type: "saas",
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
-    description:
-      "Automation suite including CRM, AI assistants, and workflow automation tools.",
   },
   {
     id: "gcc",
@@ -98,11 +81,34 @@ const projects: Project[] = [
     tag: "Marketplace",
     color: "bg-yellow-500",
     type: "mobile",
-    image:
-      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop",
+    image: "/Gcc.png",
     description:
       "Marketplace app for tribal goods empowering local cooperatives through digital trade.",
     stack: ["Flutter", "Firebase", "Node Js"],
+  },
+  {
+    id: "saasplatform",
+    name: "Custom SaaS Platforms",
+    category: "SaaS Platform",
+    tag: "Automation",
+    color: "bg-blue-500",
+    type: "saas",
+    image: "/Saas.png",
+    description:
+      "Automation suite including CRM, AI assistants, and workflow automation tools.",
+  },
+
+  {
+    id: "v4c",
+    name: "V4C App",
+    category: "Mobile App",
+    tag: "EdTech",
+    color: "bg-purple-500",
+    type: "mobile",
+    image: "/V4C.png",
+    description:
+      "A classroom management app to display courses and track course completion progress for teachers.",
+    stack: ["Flutter", "Firebase"],
   },
 ];
 
@@ -211,14 +217,16 @@ const Projects: React.FC = () => {
                 onClick={() => setSelectedProject(p)}
               >
                 <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-gradient-to-br from-gray-900/60 to-gray-800/40 backdrop-blur-md flex flex-col h-full shadow-[0_0_20px_rgba(56,189,248,0.08)] hover:shadow-[0_0_25px_rgba(56,189,248,0.15)] transition-all duration-300">
-                  <div className="aspect-video relative">
+                  <div className="relative w-full h-48 md:h-40 lg:h-44 overflow-hidden rounded-t-2xl">
                     <img
                       src={p.image}
                       alt={p.name}
                       loading="lazy"
                       className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+
                     <span
                       className={`${p.color} text-white absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-semibold shadow-lg`}
                     >

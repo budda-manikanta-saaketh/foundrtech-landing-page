@@ -11,6 +11,7 @@ interface Project {
   image: string;
   description: string;
   stack?: string[];
+  playstore?: string;
 }
 
 const projects: Project[] = [
@@ -25,6 +26,8 @@ const projects: Project[] = [
     description:
       "Shared-economy platform for construction equipment rental without inventory management.",
     stack: ["React Native", "Node.js", "Firebase", "Razor Pay"],
+    playstore:
+      "https://play.google.com/store/apps/details?id=in.restateapp.restate&pli=1",
   },
   {
     id: "bitebox",
@@ -49,6 +52,8 @@ const projects: Project[] = [
     description:
       "Platform for teachers to improve classroom engagement and track student growth.",
     stack: ["Flutter", "Firebase", "Node Js"],
+    playstore:
+      "https://play.google.com/store/apps/details?id=com.happyschoolculture.happy_school&hl=en_IN",
   },
   {
     id: "carocart",
@@ -61,6 +66,8 @@ const projects: Project[] = [
     description:
       "Hyperlocal delivery app with real-time tracking and secure payments for defense bases.",
     stack: ["Flutter", "My SQL", "Spring Boot", "React Js"],
+    playstore:
+      "https://play.google.com/store/apps/details?id=com.carocart.carocart&hl=en_IN",
   },
   {
     id: "happyschooldashboard",
@@ -275,30 +282,33 @@ const Projects: React.FC = () => {
         </div>
       </div>
 
-      {/* Modal */}
-      {/* Modal */}
       <AnimatePresence>
         {selectedProject && (
           <motion.div
-            className="fixed inset-0 bg-black/80 backdrop-blur-xl z-50 flex items-center justify-center p-6"
+            className="fixed inset-0 bg-black/80 backdrop-blur-xl z-50 
+                 flex items-center justify-center p-4 overflow-y-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedProject(null)}
           >
             <motion.div
-              className="relative max-w-4xl w-full bg-gradient-to-br from-gray-900/90 via-black/80 to-black border border-cyan-400/30 rounded-3xl overflow-hidden shadow-[0_0_40px_rgba(56,189,248,0.35)]"
+              className="relative w-full max-w-2xl md:max-w-3xl lg:max-w-4xl 
+                   max-h-[90vh] overflow-y-auto
+                   bg-gradient-to-br from-gray-900/90 via-black/80 to-black
+                   border border-cyan-400/30 rounded-3xl 
+                   shadow-[0_0_40px_rgba(56,189,248,0.35)]"
               initial={{ scale: 0.9, y: 20, opacity: 0 }}
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.9, y: 20, opacity: 0 }}
               transition={{ duration: 0.25, type: "spring", damping: 22 }}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* ⭐ Floating Close Button */}
               <button
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/50 backdrop-blur-md 
-                     border border-white/20 hover:bg-white/20 transition"
+                className="absolute top-4 right-4 z-20 p-2 rounded-full
+                     bg-black/50 backdrop-blur-md border border-white/20 
+                     hover:bg-white/20 transition"
               >
                 <svg
                   className="w-5 h-5 text-white"
@@ -315,11 +325,11 @@ const Projects: React.FC = () => {
                 </svg>
               </button>
 
-              {/* ⭐ Larger Image */}
               <img
                 src={selectedProject.image}
                 alt={selectedProject.name}
-                className="w-full h-96 object-cover opacity-90 border-b border-white/10"
+                className="w-full h-56 sm:h-72 md:h-80 lg:h-96 
+                     object-cover opacity-90 border-b border-white/10"
               />
 
               <div className="p-8">
@@ -355,10 +365,42 @@ const Projects: React.FC = () => {
                     </div>
                   </>
                 )}
+                {selectedProject.playstore && (
+                  <a
+                    href={selectedProject.playstore}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group/btn relative w-full py-4 rounded-xl mt-4 mb-4 
+               flex items-center justify-center gap-3
+               bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500 
+               hover:from-emerald-400 hover:via-green-400 hover:to-teal-400 
+               transition-all duration-300 text-white font-bold text-lg 
+               shadow-[0_0_25px_rgba(16,185,129,0.3)] 
+               hover:shadow-[0_0_35px_rgba(16,185,129,0.5)] overflow-hidden"
+                  >
+                    <div
+                      className="absolute inset-0 bg-gradient-to-r 
+                    from-white/0 via-white/20 to-white/0 
+                    translate-x-[-100%] 
+                    group-hover/btn:translate-x-[100%] 
+                    transition-transform duration-700"
+                    />
+
+                    <svg
+                      className="w-6 h-6 relative z-10"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
+                    </svg>
+
+                    <span className="relative z-10">View on Play Store</span>
+                  </a>
+                )}
 
                 <button
                   onClick={() => setSelectedProject(null)}
-                  className="mt-6 w-full py-3 rounded-lg bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
+                  className="w-full py-3 rounded-lg bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
                        hover:from-cyan-400 hover:to-purple-400 text-white font-semibold transition shadow-lg"
                 >
                   Close

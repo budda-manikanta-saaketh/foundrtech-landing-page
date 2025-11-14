@@ -285,22 +285,31 @@ const ProjectsSection: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-black/80 backdrop-blur-xl z-50 flex items-center justify-center p-6"
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 bg-black/80 backdrop-blur-xl z-50 
+                 flex items-center justify-center p-3 overflow-y-auto"
             onClick={() => setSelected(null)}
           >
             <motion.div
               initial={{ scale: 0.9, y: 20, opacity: 0 }}
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.9, y: 20, opacity: 0 }}
-              transition={{ duration: 0.3, type: "spring", damping: 25 }}
-              className="relative bg-gradient-to-br from-gray-900/90 via-black/80 to-black border border-cyan-400/30 rounded-2xl shadow-[0_0_50px_rgba(56,189,248,0.3)] max-w-4xl w-full overflow-hidden"
+              transition={{ duration: 0.25, type: "spring", damping: 22 }}
+              className="
+          relative w-full 
+          max-w-sm sm:max-w-md md:max-w-2xl lg:max-w-4xl
+          max-h-[90vh] overflow-y-auto
+          bg-gradient-to-br from-gray-900/90 via-black/80 to-black
+          border border-cyan-400/30 rounded-2xl shadow-[0_0_40px_rgba(56,189,248,0.3)]
+        "
               onClick={(e) => e.stopPropagation()}
             >
-              {/* ⭐ Floating Close Button */}
+              {/* Close Button */}
               <button
                 onClick={() => setSelected(null)}
-                className="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/50 backdrop-blur-md border border-white/20 hover:bg-white/20 transition"
+                className="absolute top-3 right-3 z-20 p-2 rounded-full 
+                     bg-black/50 backdrop-blur-md border border-white/20 
+                     hover:bg-white/20 transition"
               >
                 <svg
                   className="w-5 h-5 text-white"
@@ -317,66 +326,94 @@ const ProjectsSection: React.FC = () => {
                 </svg>
               </button>
 
-              {/* ⭐ Larger Image */}
+              {/* Responsive Image – Smaller on Mobile */}
               <img
                 src={selected.image}
                 alt={selected.title}
-                className="w-full h-96 object-cover opacity-90"
+                className="w-full h-40 sm:h-56 md:h-72 lg:h-96 object-cover opacity-90"
               />
 
-              <div className="p-8">
-                <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+              {/* Content */}
+              <div className="p-4 sm:p-6 md:p-8">
+                <h3
+                  className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 
+                         bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 
+                         bg-clip-text text-transparent"
+                >
                   {selected.title}
                 </h3>
 
-                <p className="text-gray-300 mb-6">{selected.summary}</p>
+                <p className="text-gray-300 mb-4 sm:mb-6 text-sm sm:text-base">
+                  {selected.summary}
+                </p>
 
-                <h4 className="text-lg font-semibold text-cyan-400 mb-2">
+                <h4 className="text-cyan-400 text-base sm:text-lg font-semibold mb-2">
                   Key Features
                 </h4>
-                <ul className="text-gray-400 list-disc list-inside mb-6 space-y-1">
+                <ul className="text-gray-400 list-disc list-inside mb-4 sm:mb-6 space-y-1 text-sm">
                   {selected.features.map((f) => (
                     <li key={f}>{f}</li>
                   ))}
                 </ul>
 
-                <h4 className="text-lg font-semibold text-cyan-400 mb-2">
+                <h4 className="text-cyan-400 text-base sm:text-lg font-semibold mb-2">
                   Technology Stack
                 </h4>
-                <div className="flex flex-wrap gap-2 mb-8">
+                <div className="flex flex-wrap gap-2 mb-6 sm:mb-8">
                   {selected.stack.map((s) => (
                     <span
                       key={s}
-                      className="bg-gradient-to-r from-cyan-400/20 to-blue-500/20 border border-cyan-400/30 text-cyan-200 px-3 py-1 rounded-full text-xs"
+                      className="bg-gradient-to-r from-cyan-400/20 to-blue-500/20 
+                           border border-cyan-400/30 text-cyan-200 
+                           px-2 py-1 rounded-full text-[10px] sm:text-xs"
                     >
                       {s}
                     </span>
                   ))}
                 </div>
 
-                {/* Play Store Button (optional) */}
+                {/* Play Store Button */}
                 {selected.playstore && (
                   <a
                     href={selected.playstore}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group/btn relative w-full py-4 rounded-xl mb-4 flex items-center justify-center gap-3 bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500 hover:from-emerald-400 hover:via-green-400 hover:to-teal-400 transition-all duration-300 text-white font-bold text-lg shadow-[0_0_25px_rgba(16,185,129,0.3)] hover:shadow-[0_0_35px_rgba(16,185,129,0.5)] overflow-hidden"
+                    className="group/btn relative w-full py-3 sm:py-4 rounded-xl mb-3 
+                        flex items-center justify-center gap-2 sm:gap-3 
+                        text-sm sm:text-lg font-bold
+                        bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500
+                        hover:from-emerald-400 hover:via-green-400 hover:to-teal-400
+                        transition-all duration-300 text-white
+                        shadow-[0_0_25px_rgba(16,185,129,0.3)]
+                        hover:shadow-[0_0_35px_rgba(16,185,129,0.5)] overflow-hidden"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700" />
+                    <div
+                      className="absolute inset-0 bg-gradient-to-r 
+                              from-white/0 via-white/20 to-white/0 
+                              translate-x-[-100%]
+                              group-hover/btn:translate-x-[100%]
+                              transition-transform duration-700"
+                    />
+
                     <svg
-                      className="w-6 h-6 relative z-10"
-                      viewBox="0 0 24 24"
+                      className="w-5 h-5 sm:w-6 sm:h-6 relative z-10"
                       fill="currentColor"
+                      viewBox="0 0 24 24"
                     >
                       <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
                     </svg>
-                    <span className="relative z-10">View on Play Store</span>
+
+                    <span className="relative z-10">Play Store</span>
                   </a>
                 )}
 
+                {/* Close Button */}
                 <button
                   onClick={() => setSelected(null)}
-                  className="w-full py-3 rounded-lg bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 text-white font-semibold"
+                  className="w-full py-2.5 sm:py-3 rounded-lg 
+                       bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
+                       hover:from-cyan-400 hover:to-purple-400
+                       text-white font-semibold text-sm sm:text-base"
                 >
                   Close
                 </button>

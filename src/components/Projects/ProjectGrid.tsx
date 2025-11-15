@@ -20,7 +20,7 @@ const filters = [
   { label: "Mobile Apps", value: "mobile" },
   { label: "Web Platforms", value: "web" },
   { label: "SaaS Tools", value: "saas" },
-  { label: "E-Commerce", value: "ecommerce" },
+  { label: "AI Automation", value: "automation" },
 ];
 
 const projects: Project[] = [
@@ -179,6 +179,76 @@ const projects: Project[] = [
     ],
     stack: ["Flutter", "Firebase"],
   },
+  {
+    id: "aiemailautomation",
+    title: "AI Email Workflow Automation",
+    category: "automation",
+    badge: "AI Automation",
+    color: "teal",
+    image: "/AiEmail.png",
+    summary:
+      "An AI-powered automation suite that manages outbound emails, sequences, follow-ups, lead scoring, and smart routing.",
+    features: [
+      "Automated multi-step email sequences",
+      "AI-driven follow-up detection",
+      "Smart reply classification",
+      "Lead scoring & intent detection",
+    ],
+    stack: ["Node.js", "Python", "OpenAI API", "Firebase", "Zapier", "N8N"],
+  },
+
+  {
+    id: "aiworkflow",
+    title: "AI Workflow Orchestrator",
+    category: "automation",
+    badge: "AI Automation",
+    color: "cyan",
+    image: "/AiWorkflow.png",
+    summary:
+      "Intelligent automation engine that connects business tools, automates repetitive tasks, and executes workflows without human input.",
+    features: [
+      "AI-triggered workflow execution",
+      "Slack/Email command automation",
+      "Document parsing + task creation",
+      "CRM + ERP system integrations",
+    ],
+    stack: ["Python", "React", "FastAPI", "OpenAI", "Supabase", "N8N"],
+  },
+
+  {
+    id: "aidocumentprocessor",
+    title: "AI Document Processor",
+    category: "automation",
+    badge: "AI Automation",
+    color: "purple",
+    image: "/AiDocs.png",
+    summary:
+      "Automatically extracts data from invoices, PDFs, forms, and emails using advanced LLMs and OCR pipelines.",
+    features: [
+      "OCR + LLM hybrid extraction",
+      "Smart validation rules",
+      "Bulk document automation",
+      "Export to Excel, CRM, or APIs",
+    ],
+    stack: ["Python", "Tesseract OCR", "OpenAI", "MongoDB", "N8N"],
+  },
+  {
+    id: "aiagent",
+    title: "Custom AI Agent",
+    category: "automation",
+    badge: "AI Automation",
+    color: "blue",
+    image: "/AiAgent.png",
+    summary:
+      "A personalized intelligent agent capable of automating tasks, generating content, performing conversations, and integrating with business tools.",
+    features: [
+      "Autonomous task execution",
+      "Chat-based command interface",
+      "Integrates with APIs & databases",
+      "Memory-enabled personalized workflows",
+    ],
+    stack: ["Node.js", "Python", "OpenAI", "Vector DB", "Redis", "N8N"],
+  },
 ];
 
 const ProjectsSection: React.FC = () => {
@@ -256,8 +326,17 @@ const ProjectsSection: React.FC = () => {
                     alt={p.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                  <div className="absolute top-4 left-4 text-xs px-3 py-1 rounded-full bg-cyan-400/20 text-cyan-300 font-semibold border border-cyan-400/20 backdrop-blur-md">
+
+                  {/* Gradient ON bottom */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent z-10" />
+
+                  {/* Badge ABOVE gradient */}
+                  <div
+                    className="absolute top-4 left-4 z-20
+        text-xs px-3 py-1 rounded-full
+        bg-cyan-500/30 text-cyan-200
+        font-semibold border border-cyan-400/40 backdrop-blur-md"
+                  >
                     {p.badge}
                   </div>
                 </div>
@@ -287,7 +366,7 @@ const ProjectsSection: React.FC = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
             className="fixed inset-0 bg-black/80 backdrop-blur-xl z-50 
-                 flex items-center justify-center p-3 overflow-y-auto"
+                  flex items-center justify-center p-3 overflow-y-auto"
             onClick={() => setSelected(null)}
           >
             <motion.div
@@ -296,20 +375,20 @@ const ProjectsSection: React.FC = () => {
               exit={{ scale: 0.9, y: 20, opacity: 0 }}
               transition={{ duration: 0.25, type: "spring", damping: 22 }}
               className="
-          relative w-full 
-          max-w-sm sm:max-w-md md:max-w-2xl lg:max-w-4xl
-          max-h-[90vh] overflow-y-auto
-          bg-gradient-to-br from-gray-900/90 via-black/80 to-black
-          border border-cyan-400/30 rounded-2xl shadow-[0_0_40px_rgba(56,189,248,0.3)]
-        "
+            relative w-full 
+            max-w-sm sm:max-w-md md:max-w-2xl lg:max-w-4xl
+            max-h-[90vh] overflow-y-auto
+            bg-gradient-to-br from-gray-900/90 via-black/80 to-black
+            border border-cyan-400/30 rounded-2xl shadow-[0_0_40px_rgba(56,189,248,0.3)]
+          "
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}
               <button
                 onClick={() => setSelected(null)}
                 className="absolute top-3 right-3 z-20 p-2 rounded-full 
-                     bg-black/50 backdrop-blur-md border border-white/20 
-                     hover:bg-white/20 transition"
+                      bg-black/50 backdrop-blur-md border border-white/20 
+                      hover:bg-white/20 transition"
               >
                 <svg
                   className="w-5 h-5 text-white"
@@ -337,8 +416,8 @@ const ProjectsSection: React.FC = () => {
               <div className="p-4 sm:p-6 md:p-8">
                 <h3
                   className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 
-                         bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 
-                         bg-clip-text text-transparent"
+                          bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 
+                          bg-clip-text text-transparent"
                 >
                   {selected.title}
                 </h3>
@@ -364,8 +443,8 @@ const ProjectsSection: React.FC = () => {
                     <span
                       key={s}
                       className="bg-gradient-to-r from-cyan-400/20 to-blue-500/20 
-                           border border-cyan-400/30 text-cyan-200 
-                           px-2 py-1 rounded-full text-[10px] sm:text-xs"
+                            border border-cyan-400/30 text-cyan-200 
+                            px-2 py-1 rounded-full text-[10px] sm:text-xs"
                     >
                       {s}
                     </span>
@@ -379,20 +458,20 @@ const ProjectsSection: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group/btn relative w-full py-3 sm:py-4 rounded-xl mb-3 
-                        flex items-center justify-center gap-2 sm:gap-3 
-                        text-sm sm:text-lg font-bold
-                        bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500
-                        hover:from-emerald-400 hover:via-green-400 hover:to-teal-400
-                        transition-all duration-300 text-white
-                        shadow-[0_0_25px_rgba(16,185,129,0.3)]
-                        hover:shadow-[0_0_35px_rgba(16,185,129,0.5)] overflow-hidden"
+                          flex items-center justify-center gap-2 sm:gap-3 
+                          text-sm sm:text-lg font-bold
+                          bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500
+                          hover:from-emerald-400 hover:via-green-400 hover:to-teal-400
+                          transition-all duration-300 text-white
+                          shadow-[0_0_25px_rgba(16,185,129,0.3)]
+                          hover:shadow-[0_0_35px_rgba(16,185,129,0.5)] overflow-hidden"
                   >
                     <div
                       className="absolute inset-0 bg-gradient-to-r 
-                              from-white/0 via-white/20 to-white/0 
-                              translate-x-[-100%]
-                              group-hover/btn:translate-x-[100%]
-                              transition-transform duration-700"
+                                from-white/0 via-white/20 to-white/0 
+                                translate-x-[-100%]
+                                group-hover/btn:translate-x-[100%]
+                                transition-transform duration-700"
                     />
 
                     <svg
@@ -411,9 +490,9 @@ const ProjectsSection: React.FC = () => {
                 <button
                   onClick={() => setSelected(null)}
                   className="w-full py-2.5 sm:py-3 rounded-lg 
-                       bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
-                       hover:from-cyan-400 hover:to-purple-400
-                       text-white font-semibold text-sm sm:text-base"
+                        bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
+                        hover:from-cyan-400 hover:to-purple-400
+                        text-white font-semibold text-sm sm:text-base"
                 >
                   Close
                 </button>

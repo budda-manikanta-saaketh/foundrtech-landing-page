@@ -117,6 +117,57 @@ const projects: Project[] = [
       "A classroom management app to display courses and track course completion progress for teachers.",
     stack: ["Flutter", "Firebase"],
   },
+  {
+    id: "aiemailautomation",
+    name: "AI Email Automation",
+    category: "AI Automation",
+    tag: "Automation",
+    color: "bg-teal-500",
+    type: "ai",
+    image: "/AiEmail.png",
+    description:
+      "AI-driven email workflow engine that sends automated sequences, follows up, classifies replies, and scores leads using natural language intelligence.",
+    stack: ["Node.js", "Python", "OpenAI", "Firebase", "Zapier", "N8N"],
+  },
+
+  {
+    id: "aiworkfloworchestrator",
+    name: "AI Workflow Orchestrator",
+    category: "AI Automation",
+    tag: "AI Tools",
+    color: "bg-cyan-500",
+    type: "ai",
+    image: "/AiWorkflow.png",
+    description:
+      "A workflow engine powered by AI, capable of executing tasks, generating reports, scheduling triggers, and automating business processes end-to-end.",
+    stack: ["FastAPI", "React", "OpenAI", "Supabase", "N8N"],
+  },
+
+  {
+    id: "aidocumentprocessor",
+    name: "AI Document Processor",
+    category: "AI Automation",
+    tag: "OCR + AI",
+    color: "bg-purple-500",
+    type: "ai",
+    image: "/AiDocs.png",
+    description:
+      "Automated document extraction system that reads invoices, PDFs, forms, and handwritten text using OCR and LLMs for clean structured output.",
+    stack: ["Python", "Tesseract OCR", "LangChain", "MongoDB", "N8N"],
+  },
+
+  {
+    id: "aiagent",
+    name: "Custom AI Agent",
+    category: "AI Automation",
+    tag: "LLM Agent",
+    color: "bg-blue-500",
+    type: "ai",
+    image: "/AiAgent.png",
+    description:
+      "Dedicated AI assistant capable of performing tasks like email generation, report writing, reminders, data classification, and automated actions.",
+    stack: ["Node.js", "OpenAI", "N8N", "Next.js"],
+  },
 ];
 
 const filters = [

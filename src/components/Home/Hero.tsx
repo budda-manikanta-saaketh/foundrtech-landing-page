@@ -279,14 +279,14 @@ const Hero: React.FC = () => {
 
           <div className="flex flex-col sm:flex-row gap-4">
             <a
-              href="#projects"
+              href="/projects"
               className="relative bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-8 py-4 rounded-lg font-semibold transition-all hover:scale-105 text-center shadow-2xl hover:shadow-blue-500/50 overflow-hidden group"
             >
               <span className="relative z-10">View Our Work</span>
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
             </a>
             <a
-              href="#contact"
+              href="/contact"
               className="relative bg-white/5 hover:bg-white/10 border-2 border-white/30 px-8 py-4 rounded-lg font-semibold transition-all hover:scale-105 text-center backdrop-blur-xl shadow-xl hover:shadow-purple-500/30 overflow-hidden group"
             >
               <span className="relative z-10">Start Your Project</span>

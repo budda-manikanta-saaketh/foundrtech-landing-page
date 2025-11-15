@@ -12,7 +12,7 @@ const Hero: React.FC = () => {
 
   const strings = ["Ideas", "Dreams", "Visions"];
 
-  // Typing animation
+  /* Typing animation */
   useEffect(() => {
     const handleType = () => {
       const i = loopNum % strings.length;
@@ -36,9 +36,9 @@ const Hero: React.FC = () => {
 
     const timer = setTimeout(handleType, typingSpeed);
     return () => clearTimeout(timer);
-  }, [typedText, isDeleting, loopNum, typingSpeed, strings]);
+  }, [typedText, isDeleting, loopNum, typingSpeed]);
 
-  // Mouse tilt interaction
+  /* Mouse tilt interaction */
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (frameRef.current) {
@@ -52,7 +52,7 @@ const Hero: React.FC = () => {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  // Particle system background
+  /* Particle system background */
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -91,11 +91,11 @@ const Hero: React.FC = () => {
         this.speedY = Math.random() * 0.6 - 0.3;
         this.opacity = Math.random() * 0.8 + 0.3;
         const colors = [
-          "59,130,246", // blue
-          "34,211,238", // cyan
-          "139,92,246", // purple
-          "236,72,153", // pink
-          "34,197,94", // green
+          "59,130,246",
+          "34,211,238",
+          "139,92,246",
+          "236,72,153",
+          "34,197,94",
         ];
         this.color = colors[Math.floor(Math.random() * colors.length)];
         this.angle = Math.random() * Math.PI * 2;
@@ -194,7 +194,6 @@ const Hero: React.FC = () => {
         p.draw(ctx);
       });
 
-      // Linking lines
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
@@ -239,15 +238,21 @@ const Hero: React.FC = () => {
   const rotateY = mousePosition.x * -15;
 
   return (
-    <section
+    <header
       id="home"
       className="min-h-screen flex items-center relative overflow-hidden bg-black"
+      role="banner"
     >
-      {/* Canvas background */}
-      <canvas ref={canvasRef} className="absolute inset-0 z-0" />
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-950/40 via-purple-950/30 to-black/60 z-0" />
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 z-0"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute inset-0 bg-gradient-to-br from-blue-950/40 via-purple-950/30 to-black/60 z-0"
+        aria-hidden="true"
+      />
 
-      {/* Main content */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-12 items-center">
         {/* TEXT BLOCK */}
         <div className="space-y-8 text-left">
@@ -262,40 +267,38 @@ const Hero: React.FC = () => {
             >
               {typedText}
               <span className="animate-pulse">|</span>
-              <span
-                className="absolute inset-0 opacity-0 select-none"
-                aria-hidden="true"
-              >
-                Visions
-              </span>
+              <span className="sr-only">Ideas Dreams Visions</span>
             </span>{" "}
             Into Scalable Products
           </h1>
 
           <p className="text-xl text-gray-300 max-w-2xl drop-shadow-lg">
-            At Foundr Tech, we think like founders. We partner with you through
-            every step of the startup journey from idea to product-market fit.
+            Foundr Tech is a full-stack product studio that helps startups turn
+            ideas into scalable, high-quality digital products through
+            engineering, AI automation, cloud systems, and modern UI design.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4">
+          <nav
+            aria-label="Primary navigation"
+            className="flex flex-col sm:flex-row gap-4"
+          >
             <a
               href="/projects"
               className="relative bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-8 py-4 rounded-lg font-semibold transition-all hover:scale-105 text-center shadow-2xl hover:shadow-blue-500/50 overflow-hidden group"
             >
               <span className="relative z-10">View Our Work</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
             </a>
+
             <a
               href="/contact"
               className="relative bg-white/5 hover:bg-white/10 border-2 border-white/30 px-8 py-4 rounded-lg font-semibold transition-all hover:scale-105 text-center backdrop-blur-xl shadow-xl hover:shadow-purple-500/30 overflow-hidden group"
             >
               <span className="relative z-10">Start Your Project</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
             </a>
-          </div>
+          </nav>
         </div>
 
-        {/* 3D MONITOR */}
+        {/* 3D MONITOR BLOCK */}
         <div
           ref={frameRef}
           className="relative flex justify-center"
@@ -308,13 +311,19 @@ const Hero: React.FC = () => {
               transformStyle: "preserve-3d",
             }}
           >
-            <div className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black p-4 rounded-3xl shadow-2xl border border-gray-600/40 overflow-hidden">
+            <div
+              className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black p-4 rounded-3xl shadow-2xl border border-gray-600/40 overflow-hidden"
+              role="img"
+              aria-label="Foundr Tech Logo Display"
+            >
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-pink-500/20 blur-xl opacity-70 animate-pulse"></div>
+
               <div className="relative bg-gradient-to-br from-gray-950 to-gray-900 p-3 rounded-2xl border border-gray-700 shadow-inner overflow-hidden">
                 <div className="relative rounded-xl overflow-hidden border border-blue-500/30 bg-gradient-to-br from-gray-900 via-black to-gray-950 shadow-lg">
                   <img
                     src={logo}
-                    alt="Foundr Tech"
+                    alt="Foundr Tech company logo"
+                    loading="lazy"
                     className="w-full h-full object-contain opacity-90"
                   />
                   <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-30 pointer-events-none" />
@@ -323,14 +332,14 @@ const Hero: React.FC = () => {
               </div>
             </div>
 
-            {/* Stand */}
+            {/* STAND */}
             <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-48 h-4 bg-gradient-to-r from-gray-700 via-gray-600 to-gray-700 rounded-full shadow-[0_0_25px_rgba(0,0,0,0.5)]" />
             <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-8 h-12 bg-gradient-to-b from-gray-600 to-gray-800 rounded-t-lg shadow-inner" />
             <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-[300px] h-[150px] bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 blur-[80px] opacity-20" />
           </div>
         </div>
       </div>
-    </section>
+    </header>
   );
 };
 

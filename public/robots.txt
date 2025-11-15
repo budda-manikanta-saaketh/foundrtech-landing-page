@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://foundrtech.in/sitemap.xml
+
+Disallow: /private/
+Disallow: /admin/
+Disallow: /tmp/
